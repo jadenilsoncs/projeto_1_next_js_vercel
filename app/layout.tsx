@@ -1,42 +1,41 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
+import type { Metadata } from 'next'
+import { Inter, Playfair_Display, Montserrat } from 'next/font/google'
+import './globals.css'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+})
 
 export const metadata: Metadata = {
-  title: 'Seu Nome - Desenvolvedor',
-  description: 'Site pessoal e portfólio',
-};
+  title: 'Móveis Elegance - Móveis Premium com Design Exclusivo',
+  description: 'Móveis de alto padrão que transformam ambientes. Design exclusivo, materiais nobres e artesanato refinado.',
+}
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="pt-BR">
-      <body className={`${inter.className} bg-white`}>
-        <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" className="text-xl font-bold">SeuNome</a>
-            <div className="flex gap-6">
-              <a href="/" className="hover:text-blue-600">Início</a>
-              <a href="/sobre" className="hover:text-blue-600">Sobre</a>
-              <a href="/contato" className="hover:text-blue-600">Contato</a>
-            </div>
-          </div>
-        </nav>
-        
-        <main className="pt-16">
-          {children}
-        </main>
-
-        <footer className="bg-gray-100 py-8 text-center text-gray-600">
-          <p>© {new Date().getFullYear()} Seu Nome. Todos os direitos reservados.</p>
-          <p className="mt-2">Desenvolvido com Next.js e Tailwind CSS</p>
-        </footer>
-      </body>
-    </html>
-  );
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable} ${montserrat.variable}`}>
+      <body className="font-sans bg-primary-50 text-gray-900 antialiased">
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  )
 }
