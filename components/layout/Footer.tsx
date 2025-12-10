@@ -1,11 +1,24 @@
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+  
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-4 text-center">
-        <p className="text-2xl font-bold mb-4">MóveisPremium</p>
-        <p className="text-gray-400 mb-8">Transformando espaços desde 2010</p>
-        <div className="border-t border-gray-800 pt-8 text-gray-500">
-          <p>© {new Date().getFullYear()} MóveisPremium. Todos os direitos reservados.</p>
+    <footer className="bg-cinza-escuro text-white py-8 mt-12">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center">
+          {/* Texto de copyright - IDÊNTICO */}
+          <p className="mb-4">
+            © 2019-{currentYear} Detalhe Móveis. Todos os direitos reservados.
+          </p>
+          
+          {/* Texto de desenvolvimento - IDÊNTICO */}
+          <p className="text-sm text-gray-400">
+            Desenvolvido por Viusite.com.br
+          </p>
+          
+          {/* Versão Next.js (adicional) */}
+          <p className="text-xs text-gray-500 mt-4">
+            Versão Next.js + Vercel
+          </p>
         </div>
       </div>
     </footer>

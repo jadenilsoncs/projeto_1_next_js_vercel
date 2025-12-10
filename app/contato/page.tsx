@@ -1,132 +1,268 @@
+'use client'
+
+import { useState } from 'react'
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react'
+
 export default function ContatoPage() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    telefone: '',
+    assunto: '',
+    mensagem: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulação de envio
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      setFormData({ nome: '', email: '', telefone: '', assunto: '', mensagem: '' })
+    }, 1500)
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const assuntos = [
+    'Orçamento de Produtos',
+    'Dúvida Técnica',
+    'Reclamação',
+    'Sugestão',
+    'Trabalhe Conosco',
+    'Outro'
+  ]
+
   return (
-    <div className="min-h-screen pt-8 pb-20">
+    <div className="pt-8 pb-20">
       {/* Hero */}
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Entre em Contato</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Estamos aqui para ajudar. Entre em contato para orçamentos, dúvidas ou visitas.
+      <section className="bg-gradient-to-r from-azul-escuro to-blue-900 text-white py-20">
+        <div className="container">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            ENTRE EM <span className="text-laranja">CONTATO</span>
+          </h1>
+          <p className="text-xl max-w-3xl">
+            Estamos prontos para atender você e tirar todas as suas dúvidas
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto px-4 py-20">
+      <div className="container py-20">
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Informações */}
+          {/* Informações de Contato - IDÊNTICO */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">Informações</h2>
+            <h2 className="text-2xl font-bold text-azul-escuro mb-8">
+              INFORMAÇÕES DE CONTATO
+            </h2>
             
-            <div className="space-y-6 mb-12">
+            <div className="space-y-8 mb-12">
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-2xl">📞</span>
+                <div className="w-12 h-12 bg-laranja text-white rounded-lg flex items-center justify-center mr-4">
+                  <Phone size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Telefone</h3>
-                  <p className="text-gray-600">(11) 99999-9999</p>
-                  <p className="text-gray-600">(11) 98888-8888 (WhatsApp)</p>
+                  <h3 className="font-bold text-azul-escuro mb-2">Telefone</h3>
+                  <p className="text-cinza-escuro">(11) 99999-9999</p>
+                  <p className="text-cinza-escuro">(11) 98888-8888 (WhatsApp)</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-2xl">✉️</span>
+                <div className="w-12 h-12 bg-laranja text-white rounded-lg flex items-center justify-center mr-4">
+                  <Mail size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">E-mail</h3>
-                  <p className="text-gray-600">contato@moveispremium.com</p>
-                  <p className="text-gray-600">vendas@moveispremium.com</p>
+                  <h3 className="font-bold text-azul-escuro mb-2">E-mail</h3>
+                  <p className="text-cinza-escuro">contato@detalhemoveis.com.br</p>
+                  <p className="text-cinza-escuro">vendas@detalhemoveis.com.br</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-2xl">📍</span>
+                <div className="w-12 h-12 bg-laranja text-white rounded-lg flex items-center justify-center mr-4">
+                  <MapPin size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Endereço</h3>
-                  <p className="text-gray-600">Av. Paulista, 1000 - 10º andar</p>
-                  <p className="text-gray-600">Bela Vista, São Paulo - SP</p>
-                  <p className="text-gray-600">CEP: 01310-100</p>
+                  <h3 className="font-bold text-azul-escuro mb-2">Endereço</h3>
+                  <p className="text-cinza-escuro">Rua Exemplo, 123 - Bairro Industrial</p>
+                  <p className="text-cinza-escuro">São Paulo - SP</p>
+                  <p className="text-cinza-escuro">CEP: 00000-000</p>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <div className="w-12 h-12 bg-laranja text-white rounded-lg flex items-center justify-center mr-4">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-azul-escuro mb-2">Horário de Funcionamento</h3>
+                  <p className="text-cinza-escuro">Segunda a Sexta: 8h às 18h</p>
+                  <p className="text-cinza-escuro">Sábado: 8h às 12h</p>
                 </div>
               </div>
             </div>
 
-            {/* Horário */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="font-semibold text-gray-900 mb-4">Horário de Funcionamento</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Segunda a Sexta</span>
-                  <span className="font-medium">9h às 18h</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Sábado</span>
-                  <span className="font-medium">9h às 13h</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Domingo</span>
-                  <span className="font-medium">Fechado</span>
-                </div>
-              </div>
+            {/* WhatsApp Button - IDÊNTICO */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+              <h3 className="font-bold text-green-800 mb-4">Atendimento Rápido</h3>
+              <p className="text-green-700 mb-6">
+                Prefere um atendimento mais rápido? Clique abaixo para falar diretamente no WhatsApp.
+              </p>
+              <a
+                href="https://wa.me/5511999999999"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-600 transition-colors w-full"
+              >
+                <Phone size={20} className="mr-2" />
+                Falar no WhatsApp
+              </a>
             </div>
           </div>
 
-          {/* Formulário */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Envie sua Mensagem</h2>
+          {/* Formulário - IDÊNTICO */}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-azul-escuro mb-6">
+              ENVIE SUA MENSAGEM
+            </h2>
             
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            {isSubmitted ? (
+              <div className="text-center py-12">
+                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-azul-escuro mb-4">Mensagem Enviada!</h3>
+                <p className="text-cinza-escuro mb-8">
+                  Obrigado pelo seu contato. Retornaremos em até 24 horas.
+                </p>
+                <button
+                  onClick={() => setIsSubmitted(false)}
+                  className="btn-primary"
+                >
+                  Enviar Nova Mensagem
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-cinza-escuro mb-2 font-medium">
+                      Nome *
+                    </label>
+                    <input
+                      type="text"
+                      name="nome"
+                      value={formData.nome}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-cinza-claro rounded-lg focus:outline-none focus:border-laranja focus:ring-2 focus:ring-orange-100"
+                      placeholder="Seu nome completo"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-cinza-escuro mb-2 font-medium">
+                      E-mail *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-cinza-claro rounded-lg focus:outline-none focus:border-laranja focus:ring-2 focus:ring-orange-100"
+                      placeholder="seu@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-cinza-escuro mb-2 font-medium">
+                      Telefone *
+                    </label>
+                    <input
+                      type="tel"
+                      name="telefone"
+                      value={formData.telefone}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-cinza-claro rounded-lg focus:outline-none focus:border-laranja focus:ring-2 focus:ring-orange-100"
+                      placeholder="(11) 99999-9999"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-cinza-escuro mb-2 font-medium">
+                      Assunto *
+                    </label>
+                    <select
+                      name="assunto"
+                      value={formData.assunto}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-cinza-claro rounded-lg focus:outline-none focus:border-laranja focus:ring-2 focus:ring-orange-100"
+                    >
+                      <option value="">Selecione um assunto</option>
+                      {assuntos.map((assunto) => (
+                        <option key={assunto} value={assunto}>{assunto}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
                 <div>
-                  <label className="block text-gray-700 mb-2">Nome *</label>
-                  <input
-                    type="text"
+                  <label className="block text-cinza-escuro mb-2 font-medium">
+                    Mensagem *
+                  </label>
+                  <textarea
+                    name="mensagem"
+                    value={formData.mensagem}
+                    onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    placeholder="Seu nome completo"
+                    rows={6}
+                    className="w-full px-4 py-3 border border-cinza-claro rounded-lg focus:outline-none focus:border-laranja focus:ring-2 focus:ring-orange-100"
+                    placeholder="Descreva sua dúvida ou solicitação..."
                   />
                 </div>
-                <div>
-                  <label className="block text-gray-700 mb-2">E-mail *</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    placeholder="seu@email.com"
-                  />
-                </div>
-              </div>
 
-              <div>
-                <label className="block text-gray-700 mb-2">Assunto</label>
-                <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                  <option value="">Selecione um assunto</option>
-                  <option value="orcamento">Solicitar Orçamento</option>
-                  <option value="duvida">Dúvida sobre Produto</option>
-                  <option value="reclamacao">Reclamação</option>
-                  <option value="parceria">Parceria Comercial</option>
-                </select>
-              </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full btn-primary inline-flex items-center justify-center disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    'Enviando...'
+                  ) : (
+                    <>
+                      <Send size={20} className="mr-2" />
+                      Enviar Mensagem
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
 
-              <div>
-                <label className="block text-gray-700 mb-2">Mensagem *</label>
-                <textarea
-                  rows={5}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                  placeholder="Descreva sua mensagem aqui..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700"
-              >
-                Enviar Mensagem
-              </button>
-            </form>
+        {/* Mapa - IDÊNTICO */}
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold text-azul-escuro mb-8 text-center">
+            NOSSA LOCALIZAÇÃO
+          </h2>
+          <div className="h-96 bg-gradient-to-br from-cinza-claro to-gray-300 rounded-xl flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-6xl mb-4">🗺️</div>
+              <p className="text-xl text-cinza-escuro">Mapa de Localização</p>
+              <p className="text-sm text-gray-500 mt-2">
+                (Integrar Google Maps com endereço real)
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,27 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-})
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-})
-
 export const metadata: Metadata = {
-  title: 'Móveis Elegance - Móveis Premium com Design Exclusivo',
-  description: 'Móveis de alto padrão que transformam ambientes. Design exclusivo, materiais nobres e artesanato refinado.',
+  title: 'Detalhe Móveis - Móveis de Fibra Sintética e Alumínio',
+  description: 'Móveis sobre medidas para área externa e interna, resistente ao clima. Alumínio fundido e luminárias.',
 }
 
 export default function RootLayout({
@@ -30,10 +14,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable} ${montserrat.variable}`}>
-      <body className="font-sans bg-primary-50 text-gray-900 antialiased">
+    <html lang="pt-BR">
+      <head>
+        {/* Fontes simples como original */}
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+      </head>
+      <body className="font-sans text-cinza-escuro bg-branco">
         <Header />
-        <main>{children}</main>
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
