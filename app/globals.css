@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Arial', sans-serif;
+/* Opcional: fonte padrão */
+html, body {
+  font-family: system-ui, sans-serif;
 }
