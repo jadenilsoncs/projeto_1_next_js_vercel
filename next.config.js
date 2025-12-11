@@ -4,10 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'www.detalhemoveisaluminios.com.br',
+        pathname: '/**',
       },
     ],
   },
-}
+  // Configuração para produção otimizada
+  reactStrictMode: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

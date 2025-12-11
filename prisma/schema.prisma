@@ -1,4 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
-  provider = "postgresql"  // ← Mude para sqlite
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Categoria {
+  id          String    @id @default(cuid())
+  nome        String    @unique
+  slug        String    @unique
+  descricao   String?
+  imagemUrl   String?
+  tipo        String    // "fibra-sintetica", "aluminio", "luminarias", "postes"
+  ordem       Int       @default(0)
+  ativo       Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  produtos    Produto[]
+  
+  @@index([slug])
+  @@index([tipo])
+}
+
+model Produto {
+  id            String      @id @default(cuid())
+  nome          String
+  slug          String      @unique
+  descricao     String?     @db.Text
+  descricaoLonga String?    @db.Text
+  preco         Float?
+  precoPromocional Float?
+  categoriaId   String
+  categoria     Categoria   @relation(fields: [categoriaId], references: [id], onDelete: Cascade)
+  imagemUrl     String?
+  imagens       String[]    // Array de URLs de imagens
+  destaque      Boolean     @default(false)
+  estoque       Int         @default(0)
+  disponivel    Boolean     @default(true)
+  tags          String[]    // Tags para busca
+  especificacoes Json?      // Especificações técnicas em JSON
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  @@index([slug])
+  @@index([categoriaId])
+  @@index([destaque])
+  @@index([disponivel])
+}
+
+model Contato {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String
+  telefone  String?
+  assunto   String
+  mensagem  String   @db.Text
+  lido      Boolean  @default(false)
+  respondido Boolean @default(false)
+  resposta  String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([email])
+  @@index([lido])
+}
+
+model Usuario {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String   @unique
+  senha     String   // Hash da senha
+  admin     Boolean  @default(false)
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([email])
 }

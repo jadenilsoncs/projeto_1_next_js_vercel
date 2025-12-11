@@ -1,31 +1,29 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Detalhe Móveis - Móveis de Fibra Sintética e Alumínio',
-  description: 'Móveis sobre medidas para área externa e interna, resistente ao clima. Alumínio fundido e luminárias.',
-}
+  title: "Detalhe Móveis - Móveis de Fibra Sintética e Alumínio",
+  description: "Móveis de fibra sintética, alumínio fundido, luminárias e postes coloniais. Fabricação própria com os melhores preços.",
+  keywords: "móveis fibra sintética, móveis alumínio, luminárias coloniais, postes, espreguiçadeiras, kit piscina",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-BR">
-      <head>
-        {/* Fontes simples como original */}
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-sans text-cinza-escuro bg-branco">
+      <body className={inter.className}>
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        {children}
         <Footer />
       </body>
     </html>
-  )
+  );
 }

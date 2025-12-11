@@ -18,12 +18,29 @@ export default function ContatoPage() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulação de envio
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      const response = await fetch('/api/contato', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Erro ao enviar mensagem')
+      }
+
       setIsSubmitted(true)
       setFormData({ nome: '', email: '', telefone: '', assunto: '', mensagem: '' })
-    }, 1500)
+    } catch (error) {
+      console.error('Erro ao enviar contato:', error)
+      alert(error instanceof Error ? error.message : 'Erro ao enviar mensagem. Tente novamente.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -71,8 +88,8 @@ export default function ContatoPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-azul-escuro mb-2">Telefone</h3>
-                  <p className="text-cinza-escuro">(11) 99999-9999</p>
-                  <p className="text-cinza-escuro">(11) 98888-8888 (WhatsApp)</p>
+                  <p className="text-cinza-escuro">+55 (37) 9 9957-1010 (VIVO)</p>
+                  <p className="text-cinza-escuro">WhatsApp: +55 (37) 9 9957-1010</p>
                 </div>
               </div>
 
@@ -82,8 +99,7 @@ export default function ContatoPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-azul-escuro mb-2">E-mail</h3>
-                  <p className="text-cinza-escuro">contato@detalhemoveis.com.br</p>
-                  <p className="text-cinza-escuro">vendas@detalhemoveis.com.br</p>
+                  <p className="text-cinza-escuro">contatodetalhemoveis@gmail.com</p>
                 </div>
               </div>
 
@@ -92,10 +108,10 @@ export default function ContatoPage() {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-azul-escuro mb-2">Endereço</h3>
-                  <p className="text-cinza-escuro">Rua Exemplo, 123 - Bairro Industrial</p>
-                  <p className="text-cinza-escuro">São Paulo - SP</p>
-                  <p className="text-cinza-escuro">CEP: 00000-000</p>
+                  <h3 className="font-bold text-azul-escuro mb-2">Endereço da Fábrica</h3>
+                  <p className="text-cinza-escuro">Estr. Corumbá, s/n - Povoado do Corumbá</p>
+                  <p className="text-cinza-escuro">Cláudio - MG</p>
+                  <p className="text-cinza-escuro">CEP: 35530-000</p>
                 </div>
               </div>
 
@@ -105,8 +121,8 @@ export default function ContatoPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-azul-escuro mb-2">Horário de Funcionamento</h3>
-                  <p className="text-cinza-escuro">Segunda a Sexta: 8h às 18h</p>
-                  <p className="text-cinza-escuro">Sábado: 8h às 12h</p>
+                  <p className="text-cinza-escuro">Segunda a Sexta: 08:30 às 18:00</p>
+                  <p className="text-cinza-escuro">Sábado: 08:30 às 12:00</p>
                 </div>
               </div>
             </div>
@@ -118,7 +134,7 @@ export default function ContatoPage() {
                 Prefere um atendimento mais rápido? Clique abaixo para falar diretamente no WhatsApp.
               </p>
               <a
-                href="https://wa.me/5511999999999"
+                href="https://api.whatsapp.com/send?phone=5537999571010&text=Atendimento Site Pergunta:"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-600 transition-colors w-full"
