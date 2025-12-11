@@ -2,16 +2,12 @@
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}", // se tiver pages
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}", // se tiver src
   ],
   theme: {
-    extend: {
-      colors: {
-        primary: '#0070f3', // Azul para links/accent
-        secondary: '#22c55e', // Verde para WhatsApp
-      },
-    },
+    extend: {},
   },
   plugins: [],
-};
+}
