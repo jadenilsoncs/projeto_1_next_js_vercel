@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import ProductCard from '@/components/ui/ProductCard';
-import CategoryFilters from '@/components/produtos/CategoryFilters';
 
 async function getCategoria(slug: string) {
   try {
@@ -29,8 +28,9 @@ async function getCategoria(slug: string) {
   }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const categoria = await getCategoria(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const categoria = await getCategoria(slug);
   
   if (!categoria) {
     return {
@@ -44,8 +44,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
-  const categoria = await getCategoria(params.slug);
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const categoria = await getCategoria(slug);
 
   if (!categoria) {
     notFound();
